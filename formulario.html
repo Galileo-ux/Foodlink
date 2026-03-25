@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -15,7 +15,7 @@
         </header>
 
         <section class="tarjeta animar-subir delay-1">
-            <form action="#" method="POST" class="formulario-donacion">
+            <form id="form-donacion" class="formulario-donacion">
                 
                 <div class="grupo-input">
                     <label for="nombre">Nombre del Establecimiento:</label>
@@ -47,5 +47,34 @@
             <a href="index.html" class="enlace-volver">← Volver al inicio</a>
         </div>
     </div>
+
+    <script>
+        // Escuchamos el evento 'submit' para que el html verifique primero que no haya campos vacíos
+        document.getElementById('form-donacion').addEventListener('submit', function(evento){
+            
+            // Evitamos que la página se recargue al darle al botón
+            evento.preventDefault();
+
+            // Atrapamos los valores que el usuario escribió
+            var nombre = document.getElementById('nombre').value.trim();
+            var descripcion = document.getElementById('descripcion').value.trim();
+            var peso = document.getElementById('peso').value.trim();
+            var hora_limite = document.getElementById('hora_limite').value.trim();
+
+            // Armamos el mensaje adaptado para el rescate de alimentos
+            var mensaje = ' Nueva Donación en EcoMida\n\n';
+            mensaje += 'Establecimiento: ' + nombre + '\n';
+            mensaje += ' Alimentos: ' + descripcion + '\n';
+            mensaje += ' Peso: ' + peso + ' kg\n';
+            mensaje += ' Pasar antes de las: ' + hora_limite + '\n\n';
+            mensaje += '¿Puedes enviar a un voluntario?';
+
+            // Usamos el número que venía en tu código
+            var numeroWhatsApp = '528187068768';
+
+            // Abrimos WhatsApp con el mensaje ya escrito
+            window.open('https://wa.me/' + numeroWhatsApp + '?text=' + encodeURIComponent(mensaje), '_blank');
+        });
+    </script>
 </body>
 </html>
