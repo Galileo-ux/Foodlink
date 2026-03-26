@@ -23,6 +23,11 @@
                 </div>
 
                 <div class="grupo-input">
+                    <label for="direccion">Dirección del Establecimiento:</label>
+                    <input type="text" id="direccion" name="direccion" placeholder="Ej. Calle Principal 123" required>
+                </div>
+
+                <div class="grupo-input">
                     <label for="descripcion">¿Qué alimentos vas a donar?</label>
                     <input type="text" id="descripcion" name="descripcion" placeholder="Ej.pan dulce" required>
                 </div>
@@ -33,9 +38,22 @@
                 </div>
 
                 <div class="grupo-input">
-                    <label for="hora_limite">¿Hasta qué hora podemos pasar?</label>
-                    <input type="time" id="hora_limite" name="hora_limite" required>
+                    <label for="contenedor">¿Los alimentos vienen en contenedor?</label>
+                    <select id="contenedor" name="contenedor" required>
+                        <option value="">Selecciona una opción</option>
+                        <option value="Sí">Sí</option>
+                        <option value="No">No</option>
+                    </select>   
                 </div>
+
+<div class="grupo-input">
+                    <label for="temperatura">¿Son alimentos refrigerados?</label>
+                    <select id="temperatura" name="temperatura" required>
+                        <option value="">Selecciona una opción</option>
+                        <option value="Sí">Sí</option>
+                        <option value="No">No</option>
+                    </select>   
+                </div>                
 
                 <div class="accion delay-2 animar-subir" style="margin-top: 20px;">
                     <button type="submit" class="boton-principal" style="width: 100%; border: none; cursor: pointer;">Enviar Información</button>
@@ -64,8 +82,11 @@
             // Armamos el mensaje adaptado para el rescate de alimentos
             var mensaje = ' Nueva Donación en EcoMida\n\n';
             mensaje += 'Establecimiento: ' + nombre + '\n';
+            mensaje += 'Dirección: ' + document.getElementById('direccion').value.trim() + '\n';
             mensaje += ' Alimentos: ' + descripcion + '\n';
             mensaje += ' Peso: ' + peso + ' kg\n';
+            mensaje += ' Contenedor: ' + (document.getElementById('contenedor').value === 'Sí' ? 'Sí' : 'No') + '\n';
+            mensaje += 'Refrigeracion: ' + (document.getElementById('temperatura').value === 'Sí' ? 'Sí' : 'No') + '\n';
             mensaje += ' Pasar antes de las: ' + hora_limite + '\n\n';
             mensaje += '¿Puedes enviar a un voluntario?';
 
