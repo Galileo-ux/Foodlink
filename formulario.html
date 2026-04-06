@@ -15,8 +15,9 @@
         </header>
 
         <section class="tarjeta animar-subir delay-1">
-            <form id="form-donacion" class="formulario-donacion">
+            <form id="form-donacion" class="formulario-donacion" method="POST" action="/donar">
                 
+
                 <div class="grupo-input">
                     <label for="nombre">Nombre del Establecimiento:</label>
                     <input type="text" id="nombre" name="nombre" placeholder="Ej. Panadería El Buen Pan" required>
@@ -59,7 +60,7 @@
                     </select>   
                 </div>
 
-<div class="grupo-input">
+                <div class="grupo-input">
                     <label for="temperatura">¿Son alimentos refrigerados?</label>
                     <select id="temperatura" name="temperatura" required>
                         <option value="">Selecciona una opción</option>
@@ -80,35 +81,22 @@
     </div>
 
     <script>
-        // Escuchamos el evento 'submit' para que el html verifique primero que no haya campos vacíos
-        document.getElementById('form-donacion').addEventListener('submit', function(evento){
-            
-            // Evitamos que la página se recargue al darle al botón
-            evento.preventDefault();
-
-            // Atrapamos los valores que el usuario escribió
-            var nombre = document.getElementById('nombre').value.trim();
-            var descripcion = document.getElementById('descripcion').value.trim();
-            var peso = document.getElementById('peso').value.trim();
-            var hora_limite = document.getElementById('hora_limite').value.trim();
-
-            // Armamos el mensaje adaptado para el rescate de alimentos
-            var mensaje = ' Nueva Donación en EcoMida\n\n';
-            mensaje += 'Establecimiento: ' + nombre + '\n';
-            mensaje += 'Dirección: ' + document.getElementById('direccion').value.trim() + '\n';
-            mensaje += ' Alimentos: ' + descripcion + '\n';
-            mensaje += ' Peso: ' + peso + ' kg\n';
-            mensaje += ' Contenedor: ' + (document.getElementById('contenedor').value === 'Sí' ? 'Sí' : 'No') + '\n';
-            mensaje += 'Refrigeracion: ' + (document.getElementById('temperatura').value === 'Sí' ? 'Sí' : 'No') + '\n';
-            mensaje += ' Pasar antes de las: ' + hora_limite + '\n\n';
-            mensaje += '¿Puedes enviar a un voluntario?';
-
-            // Usamos el número que venía en tu código
-            var numeroWhatsApp = '528187068768';
-
-            // Abrimos WhatsApp con el mensaje ya escrito
-            window.open('https://wa.me/' + numeroWhatsApp + '?text=' + encodeURIComponent(mensaje), '_blank');
-        });
+    document.getElementById('form-donacion').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const datos = {
+            nombre: document.getElementById('nombre').value,
+            direccion: document.getElementById('direccion').value,
+            descripcion: document.getElementById('descripcion').value,
+            tipo_institucion: document.getElementById('tipo_institucion').value,
+            peso: document.getElementById('peso').value,
+            contenedor: document.getElementById('contenedor').value,
+            temperatura: document.getElementById('temperatura').value
+        };
+        let donaciones = JSON.parse(localStorage.getItem('donaciones') || '[]');
+        donaciones.push(datos);
+        localStorage.setItem('donaciones', JSON.stringify(donaciones));
+        window.location.href = 'listados.html';
+    });
     </script>
 </body>
 </html>

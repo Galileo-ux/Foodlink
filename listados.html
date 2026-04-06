@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Donaciones</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .categoria { margin-top: 30px; }
+        .categoria h2 { color: #4caf50; }
+        ul { list-style: disc inside; }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <header class="cabecera animar-bajar">
+            <h1>Donaciones agrupadas por categoría</h1>
+        </header>
+        <div id="listado-donaciones"></div>
+        <div class="animar-subir delay-3 text-center" style="margin-top: 30px;">
+            <a href="index.html" class="enlace-volver">← Volver al inicio</a>
+        </div>
+    </div>
+    <script>
+        // Leer donaciones de LocalStorage
+        const donaciones = JSON.parse(localStorage.getItem('donaciones') || '[]');
+        // Agrupar por tipo_institucion
+        const categorias = {};
+        donaciones.forEach(d => {
+            const cat = d.tipo_institucion || 'Otro';
+            if (!categorias[cat]) categorias[cat] = [];
+            categorias[cat].push(d);
+        });
+        // Renderizar
+        const cont = document.getElementById('listado-donaciones');
+        if (donaciones.length === 0) {
+            cont.innerHTML = '<p>No hay donaciones registradas.</p>';
+        } else {
+            for (const cat in categorias) {
+                const items = categorias[cat];
+                const div = document.createElement('div');
+                div.className = 'categoria';
+                div.innerHTML = `<h2>${cat.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}</h2><ul>` +
+                    items.map(item => `<li><b>${item.nombre}</b> (${item.direccion}) - ${item.descripcion} - ${item.peso} kg - Contenedor: ${item.contenedor} - Refrigerado: ${item.temperatura}</li>`).join('') +
+                    '</ul>';
+                cont.appendChild(div);
+            }
+        }
+    </script>
+</body>
+</html>
