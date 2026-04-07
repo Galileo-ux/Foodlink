@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def inicio():
-    return render_template('index.html')  # 🔥 directo
+    return render_template('index.html')  #directo
 
 
 @app.route('/formulario.html')
@@ -21,7 +21,7 @@ def formulario():
 @app.route('/donar', methods=['POST'])
 def donar():
     datos = {
-        'id': str(uuid.uuid4()),  # 🔥 ID único
+        'id': str(uuid.uuid4()),  # ID único
         'nombre': request.form['nombre'],
         'direccion': request.form['direccion'],
         'descripcion': request.form['descripcion'],

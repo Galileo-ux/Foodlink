@@ -161,6 +161,7 @@ body {
     align-items: center;
     gap: 6px;
     margin-top: 8px;
+    margin-left: auto;
     padding: 8px 14px;
     font-size: 14px;
     color: #fff;
@@ -182,10 +183,29 @@ body {
 }
 li {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
 }
-
 .info-donacion {
     flex: 1;
+    word-wrap: break-word;
+}
+
+li.icono {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+/* Para las listas normales dentro de tarjetas (como el ol de "Cómo funciona") */
+.tarjeta ol, .tarjeta ul {
+    display: block; /* vuelve al comportamiento normal */
+    padding-left: 20px;
+}
+
+.tarjeta ol li {
+    display: list-item; /* asegura que el número aparezca correctamente */
+    margin-bottom: 10px;
 }

@@ -1,1 +1,12 @@
-[]
+[
+    {
+        "id": "eeff88fd-fb0e-4241-940e-526efbc3b857",
+        "nombre": "Rulo",
+        "direccion": "A1232",
+        "descripcion": "Tacos",
+        "tipo_institucion": "comida_rapida",
+        "peso": "2",
+        "contenedor": "Sí",
+        "temperatura": "Sí"
+    }
+]
