@@ -110,6 +110,7 @@ def listado():
                 <a href="/eliminar/{item.get('id','')}" class="btn-eliminar" onclick="return confirm('¿Seguro que quieres eliminar esta donación?')">
                     Eliminar
                 </a>
+                </li>
                 """
 
             html += "</ul></div>"
