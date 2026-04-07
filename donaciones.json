@@ -1,12 +1,12 @@
 [
     {
-        "id": "eeff88fd-fb0e-4241-940e-526efbc3b857",
-        "nombre": "Rulo",
-        "direccion": "A1232",
-        "descripcion": "Tacos",
-        "tipo_institucion": "comida_rapida",
-        "peso": "2",
+        "id": "cf78539b-8603-436f-a8ef-558c4c5f8669",
+        "nombre": "panaderia",
+        "direccion": "venustiano",
+        "descripcion": "pan dulce",
+        "tipo_institucion": "panaderia",
+        "peso": "7",
         "contenedor": "Sí",
-        "temperatura": "Sí"
+        "temperatura": "No"
     }
 ]
