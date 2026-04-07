@@ -105,11 +105,11 @@ def listado():
                 <b>{item['nombre']}</b> ({item['direccion']}) - 
                 {item['descripcion']} - {item['peso']} kg - 
                 Contenedor: {item['contenedor']} - 
-                Refrigerado: {item['temperatura']}
-                </li>
+                Refrigerado: {item['temperatura']}               
                 <a href="/eliminar/{item.get('id','')}" class="btn-eliminar" onclick="return confirm('¿Seguro que quieres eliminar esta donación?')">
                     Eliminar
                 </a>
+                </li>
                 """
 
             html += "</ul></div>"
