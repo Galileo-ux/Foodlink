@@ -1,5 +1,4 @@
 
-# Script simple: lee donaciones.json y genera reporte_listados.html agrupando por categoría
 import json
 
 donaciones = []
