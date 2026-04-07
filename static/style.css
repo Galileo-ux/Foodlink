@@ -180,3 +180,12 @@ body {
 .btn-eliminar:active {
     transform: scale(0.95);
 }
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info-donacion {
+    flex: 1;
+}
