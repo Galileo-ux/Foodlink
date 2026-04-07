@@ -106,11 +106,10 @@ def listado():
                 {item['descripcion']} - {item['peso']} kg - 
                 Contenedor: {item['contenedor']} - 
                 Refrigerado: {item['temperatura']}
-
+                </li>
                 <a href="/eliminar/{item.get('id','')}" class="btn-eliminar" onclick="return confirm('¿Seguro que quieres eliminar esta donación?')">
                     Eliminar
                 </a>
-                </li>
                 """
 
             html += "</ul></div>"
