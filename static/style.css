@@ -152,3 +152,31 @@ body {
     .cabecera h1 { font-size: 2.2rem; }
     .boton-principal { width: 100%; box-sizing: border-box; }
 }
+.btn-secundario {
+    background: #4caf50;
+}
+
+.btn-eliminar {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    padding: 8px 14px;
+    font-size: 14px;
+    color: #fff;
+    background: linear-gradient(135deg, #40916c, #2d694e);
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.btn-eliminar:hover {
+    background: linear-gradient(135deg, #328560, #40916c);
+    transform: translateY(-2px);
+}
+
+.btn-eliminar:active {
+    transform: scale(0.95);
+}
