@@ -1,44 +1,27 @@
-
-# Script simple: lee donaciones.json y genera reporte_listados.html agrupando por categoría
+from flask import Flask, request, redirect, render_template
 import json
-
-donaciones = []
-try:
-    with open('donaciones.json', 'r', encoding='utf-8') as f:
-        donaciones = json.load(f)
-except Exception as e:
-    print('No se pudo leer donaciones.json:', e)
-
-categorias = {}
-for d in donaciones:
-    cat = d.get('tipo_institucion', 'Otro')
-    if cat not in categorias:
-        categorias[cat] = []
-    categorias[cat].append(d)
-
-html = '<html><head><meta charset="UTF-8"><title>Reporte</title></head><body>'
-html += '<h1>Donaciones agrupadas por categoría</h1>'
-if not donaciones:
-    html += '<p>No hay donaciones registradas.</p>'
-else:
-    for cat, items in categorias.items():
-        html += f'<h2>{cat}</h2><ul>'
-        for item in items:
-            html += f'<li><b>{item["nombre"]}</b> ({item["direccion"]}) - {item["descripcion"]} - {item["peso"]} kg - Contenedor: {item["contenedor"]} - Refrigerado: {item["temperatura"]}</li>'
-        html += '</ul>'
-html += '</body></html>'
-
-with open('reporte_listados.html', 'w', encoding='utf-8') as f:
-    f.write(html)
-print('Reporte generado: reporte_listados.html')
-from flask import Flask, request, redirect
+import uuid
 
 app = Flask(__name__)
-donaciones = []
+
+# ----------- RUTAS HTML -----------
+
+@app.route('/')
+def inicio():
+    return render_template('index.html')  # 🔥 directo
+
+
+@app.route('/formulario.html')
+def formulario():
+    return render_template('formulario.html')
+
+
+# ----------- GUARDAR DONACIÓN -----------
 
 @app.route('/donar', methods=['POST'])
 def donar():
     datos = {
+        'id': str(uuid.uuid4()),  # 🔥 ID único
         'nombre': request.form['nombre'],
         'direccion': request.form['direccion'],
         'descripcion': request.form['descripcion'],
@@ -47,27 +30,101 @@ def donar():
         'contenedor': request.form['contenedor'],
         'temperatura': request.form['temperatura']
     }
+
+    try:
+        with open('donaciones.json', 'r', encoding='utf-8') as f:
+            donaciones = json.load(f)
+    except:
+        donaciones = []
+
     donaciones.append(datos)
+
+    with open('donaciones.json', 'w', encoding='utf-8') as f:
+        json.dump(donaciones, f, indent=4, ensure_ascii=False)
+
     return redirect('/listado')
+
+
+# ----------- ELIMINAR -----------
+
+@app.route('/eliminar/<id>')
+def eliminar(id):
+    try:
+        with open('donaciones.json', 'r', encoding='utf-8') as f:
+            donaciones = json.load(f)
+    except:
+        donaciones = []
+
+    donaciones = [d for d in donaciones if d.get('id') != id]
+
+    with open('donaciones.json', 'w', encoding='utf-8') as f:
+        json.dump(donaciones, f, indent=4, ensure_ascii=False)
+
+    return redirect('/listado')
+
+
+# ----------- LISTADO -----------
 
 @app.route('/listado')
 def listado():
+    try:
+        with open('donaciones.json', 'r', encoding='utf-8') as f:
+            donaciones = json.load(f)
+    except:
+        donaciones = []
+
     categorias = {}
     for d in donaciones:
-        cat = d['tipo_institucion']
+        cat = d.get('tipo_institucion', 'Otro')
         categorias.setdefault(cat, []).append(d)
-    html = "<h1>Donaciones agrupadas por categoría</h1>"
-    for cat, items in categorias.items():
-        html += f"<h2>{cat}</h2><ul>"
-        for item in items:
-            html += f"<li><b>{item['nombre']}</b> ({item['direccion']}) - {item['descripcion']} - {item['peso']} kg - Contenedor: {item['contenedor']} - Refrigerado: {item['temperatura']}</li>"
-        html += "</ul>"
-    html += '<a href="/formulario.html">Volver</a>'
+
+    html = """
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Listado de Donaciones</title>
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+    <body>
+    <div class="contenedor">
+        <header class="cabecera">
+            <h1>Donaciones agrupadas por categoría</h1>
+        </header>
+    """
+
+    if not donaciones:
+        html += "<p>No hay donaciones registradas.</p>"
+    else:
+        for cat, items in categorias.items():
+            nombre_cat = cat.replace('_', ' ').title()
+            html += f"<div class='categoria'><h2>{nombre_cat}</h2><ul>"
+
+            for item in items:
+                html += f"""
+                <li>
+                <b>{item['nombre']}</b> ({item['direccion']}) - 
+                {item['descripcion']} - {item['peso']} kg - 
+                Contenedor: {item['contenedor']} - 
+                Refrigerado: {item['temperatura']}
+
+                <a href="/eliminar/{item.get('id','')}" class="btn-eliminar" onclick="return confirm('¿Seguro que quieres eliminar esta donación?')">
+                    Eliminar
+                </a>
+                """
+
+            html += "</ul></div>"
+
+    html += """
+        <div style="margin-top: 30px; text-align:center;">
+            <a href="/" class="enlace-volver">← Volver</a>
+        </div>
+    </div>
+    </body>
+    </html>
+    """
+
     return html
 
-@app.route('/')
-def inicio():
-    return redirect('/formulario.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

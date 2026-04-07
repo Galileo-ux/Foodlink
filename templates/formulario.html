@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoMida - Donar Alimentos</title>
-    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
     <div class="contenedor contenedor-formulario">
         <header class="cabecera animar-bajar">
-            <h1>📦 Registrar Donación</h1>
+            <h1> <i class="fa-solid fa-file-circle-plus"></i> Registrar Donación</h1>
             <p class="subtitulo">Llena los datos para que un voluntario pase a recoger los alimentos.</p>
         </header>
 
@@ -76,27 +77,9 @@
         </section>
 
         <div class="animar-subir delay-3 text-center">
-            <a href="index.html" class="enlace-volver">← Volver al inicio</a>
+            <a href="/" class="enlace-volver">← Volver al inicio</a>
         </div>
     </div>
 
-    <script>
-    document.getElementById('form-donacion').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const datos = {
-            nombre: document.getElementById('nombre').value,
-            direccion: document.getElementById('direccion').value,
-            descripcion: document.getElementById('descripcion').value,
-            tipo_institucion: document.getElementById('tipo_institucion').value,
-            peso: document.getElementById('peso').value,
-            contenedor: document.getElementById('contenedor').value,
-            temperatura: document.getElementById('temperatura').value
-        };
-        let donaciones = JSON.parse(localStorage.getItem('donaciones') || '[]');
-        donaciones.push(datos);
-        localStorage.setItem('donaciones', JSON.stringify(donaciones));
-        window.location.href = 'listados.html';
-    });
-    </script>
 </body>
 </html>
