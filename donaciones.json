@@ -8,5 +8,15 @@
         "peso": "7",
         "contenedor": "Sí",
         "temperatura": "No"
+    },
+    {
+        "id": "a37a33da-cb94-46f8-874c-e2f26047a0eb",
+        "nombre": "pizza",
+        "direccion": "venustiano",
+        "descripcion": "pizza",
+        "tipo_institucion": "comida_rapida",
+        "peso": "9",
+        "contenedor": "Sí",
+        "temperatura": "Sí"
     }
 ]
