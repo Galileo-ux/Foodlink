@@ -1,5 +1,6 @@
 [
     {
+<<<<<<< HEAD
         "id": "1",
         "nombre": "Juan Pérez",
         "direccion": "Monterrey",
@@ -298,5 +299,25 @@
         "peso": "12",
         "contenedor": "caja",
         "temperatura": "ambiente"
+=======
+        "id": "cf78539b-8603-436f-a8ef-558c4c5f8669",
+        "nombre": "panaderia",
+        "direccion": "venustiano",
+        "descripcion": "pan dulce",
+        "tipo_institucion": "panaderia",
+        "peso": "7",
+        "contenedor": "Sí",
+        "temperatura": "No"
+    },
+    {
+        "id": "a37a33da-cb94-46f8-874c-e2f26047a0eb",
+        "nombre": "pizza",
+        "direccion": "venustiano",
+        "descripcion": "pizza",
+        "tipo_institucion": "comida_rapida",
+        "peso": "9",
+        "contenedor": "Sí",
+        "temperatura": "Sí"
+>>>>>>> 25db9695f93a5e88e522e2be9bd36668c1133554
     }
 ]
