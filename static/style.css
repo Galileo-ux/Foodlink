@@ -15,9 +15,6 @@ body {
     color: var(--texto);
     margin: 0;
     padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     min-height: 100vh;
 }
 
@@ -28,6 +25,7 @@ body {
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     max-width: 900px; /* Más ancho para que respiren las tarjetas */
     width: 100%;
+    margin: auto;
 }
 
 /* Cabecera */
@@ -208,4 +206,20 @@ li.icono {
 .tarjeta ol li {
     display: list-item; /* asegura que el número aparezca correctamente */
     margin-bottom: 10px;
+}
+.grafica {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+}
+@media (max-width: 600px) {
+    .grafica {
+        max-width: 100%;
+    }
+}
+i {
+    margin-right: 8px;
+    color: var(--verde-principal);
 }
